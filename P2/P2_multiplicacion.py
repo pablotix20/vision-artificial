@@ -21,13 +21,18 @@ def transform(img, transform_matrix):
     return transformed_img
 
 
-transform_matrix = np.array([[.707, -.707, 0], [.707, .707, 0], [0, 0, 1]])
-
-img = cv2.cvtColor(cv2.imread('./images/caja01.png'),
+img = cv2.cvtColor(cv2.imread('./images/caja06.png'),
                    cv2.COLOR_BGR2GRAY).astype('uint8')
 
+m1 = np.array([[1, 0, 100], [0, 1, 60], [0, 0, 1]])
+m2 = np.array([[.707, -.707, 0], [.707, .707, 0], [0, 0, 1]])
+m3 = np.array([[1, 0, -100], [0, 1, -60], [0, 0, 1]])
+mt = m3@m2@m1
+
+img1 = transform(img, mt)
+
 plt.subplot(1, 2, 1), plt.title('Original'), plt.imshow(
-    img, 'gray'), plt.axis(False)
+    img, 'gray', vmin=0, vmax=255), plt.axis(False)
 plt.subplot(1, 2, 2), plt.title('Editada'), plt.imshow(
-    transform(img, transform_matrix), 'gray'), plt.axis(False)
+    img1, 'gray', vmin=0, vmax=255), plt.axis(False)
 plt.show()
