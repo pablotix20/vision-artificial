@@ -11,7 +11,7 @@ img = cv.rotate(img, cv.ROTATE_180)  # Uncomment to test rotation detection
 otsu_threshold, bin = cv.threshold(
     img, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
 
-# Inverse image if necessary, objets must be white
+# Invert image if necessary, objets must be white
 if np.average(bin) > 127:
     bin = 255-bin
 
