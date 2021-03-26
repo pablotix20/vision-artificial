@@ -9,7 +9,7 @@ MAX_1_RATIO = 0.6
 def classify_num_by_holes(bin, print_imgs=True):
     # Get contours
     contours, hierarchy = cv.findContours(
-        numbers, cv.RETR_CCOMP, cv.CHAIN_APPROX_NONE)
+        bin, cv.RETR_CCOMP, cv.CHAIN_APPROX_NONE)
 
     # Get number of holes as number of child contours
     hole_num = np.zeros(hierarchy.shape[1])
@@ -74,5 +74,5 @@ if __name__ == "__main__":
         bin = 255-bin
 
     numbers = sudoku_numbers(bin, False)
-    mask_8, mask_469, mask_12357 = classify_num_by_holes(numbers, False)
-    mask_1 = find_ones(mask_12357)
+    mask_8, mask_469, mask_12357 = classify_num_by_holes(numbers, True)
+    mask_1 = find_ones(mask_12357, True)
